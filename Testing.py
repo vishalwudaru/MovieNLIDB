@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 27 15:06:08 2018
+Created on Mon Jul  2 23:01:13 2018
 
 @author: VISHAL-PC
 """
@@ -11,9 +11,21 @@ from stanfordcorenlp import StanfordCoreNLP
 from word2number import w2n
 import sqlite3
 
+nlp = 1
+
+def startnlp():
+    global nlp
+    nlp = StanfordCoreNLP(r'D:\IIIT\stanford-corenlp-full-2018-02-27')
+#print(nlp)
+#startnlp()
+#print(nlp)
+
+def stopnlp():
+    nlp.close()
+
 def englishToSQL(sentence):
 
-    nlp = StanfordCoreNLP(r'D:\IIIT\stanford-corenlp-full-2018-02-27')
+    #nlp = StanfordCoreNLP(r'D:\IIIT\stanford-corenlp-full-2018-02-27')
 
     #sentence = 'ratings of top 2 movies of Tom Hardy and James Cameron'
     #sentence = 'best director and actor of action movies'
@@ -46,7 +58,7 @@ def englishToSQL(sentence):
     #cparse = nlp.parse(sentence)
     dparse = nlp.dependency_parse(sentence)
     print('Completed')
-    nlp.close()
+    #nlp.close()
     
     parsedict = {}
     for line in dparse:
@@ -446,7 +458,6 @@ def englishToSQL(sentence):
         column = 'COUNT(distinct t.name)'
         col = ['Count']
     
-    
     cgname = ', g.NAME as gname'
     if notflag == 1:
         cgname = ''
@@ -506,4 +517,39 @@ def englishToSQL(sentence):
     
     return [command,result]
     
-#englishToSQL('top adventure movie directors')
+#print(englishToSQL('top adventure movie directors'))
+
+#==============================================================================
+# with open('Questions.txt') as f:
+#     lines = f.read().split('\n')
+# f.close()
+# 
+# 
+# i = 0
+# sql = []
+# nlp = StanfordCoreNLP(r'D:\IIIT\stanford-corenlp-full-2018-02-27')
+# for line in lines:
+#     i += 1
+#     sql.append(englishToSQL(line))
+#     print(i)
+#     #dd = input("Press any key to continue")
+# nlp.close()    
+# 
+# f= open("quires.txt","w+")
+# for i in range(len(lines)):
+#     f.write(lines[i]+'\n\n')
+#     f.write(sql[i][0]+'\n\n')
+#     #f.write(sql[i][1]+'\n\n')
+#     strr = ''
+#     keys = []
+#     for j in sql[i][1]:
+#         keys.append(j)
+#     for j in range (len(sql[i][1][keys[0]])):
+#         for k in range(len(keys)):
+#             strr += keys[k]+" : "+str(sql[i][1][keys[k]][j])+'\n'
+#         strr += '\n'
+#     strr += str(len(sql[i][1][keys[0]]))+' rows fetched\n'
+#     f.write(strr+'\n\n')
+# f.close()
+#==============================================================================
+    
