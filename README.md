@@ -20,15 +20,18 @@ Members: Consists of all the Directors and Main cast of movies.
 Movie: Table consisting different attributes regarding movies.
 Movie_Genre: Maps a movie with different types of Genres it has.
 Movie_Members: Maps a movie with members who acted or directed it.
-fFig 1: ER Diagram
+![movie](https://user-images.githubusercontent.com/22770420/42360867-f6b317d4-8108-11e8-9018-8f03d75dd8b5.png)
 
-Fig 2: Class Diagram
+
+
+![class](https://user-images.githubusercontent.com/22770420/42360935-5eef1140-8109-11e8-857e-dd5a7bd70ca5.png)
 
 ### Integrating NLIDB System 
 NLIDB System is responsible for converting user’s NL query into SQL statement. The given NL query is passed into a Tokenizer, then we POS tag the tokenized words and then we parsed it using Stanford Dependency Parser. Dependency parsing helps us in knowing the relation between words. For example, if the user’s query is “What are the top movies rated above 8 which are released before 2015”. In this example, the dependency parser helps us to know that ‘above’ corresponds to rating and ‘before’ corresponds to year. 
 	Based on these Dependencies and POS tags, we generated an SQL query which is used to extract corresponding data from Database.
 
-Fig 3: Data flow Diagram
+![flowchart](https://user-images.githubusercontent.com/22770420/42360937-5f2775a8-8109-11e8-8e3f-2dc962106687.png)
+
 
 ## Results
 We tested the chatbot over wide range of Natural Language queries. The following are the questions which were verified to work correctly using our chatbot. These Questions are categorized further for better readability.
