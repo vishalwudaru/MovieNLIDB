@@ -6,42 +6,46 @@ Created on Wed Jul  4 19:03:46 2018
 """
 
 import tkinter as tkr
-import Testing as nlp
+import Main as nlp
 
-def clicked():
-    strr = 'Question : ' + inputField.get("1.0","end-1c") + '\n\n\n'
-    sql = nlp.englishToSQL(inputField.get("1.0","end-1c"))
-    inputField.delete("1.0","end-1c")
-    sqltext.delete("1.0","end-1c")
-    restext.delete("1.0","end-1c")
-    sqltext.insert('end', sql[0])
-    keys = []
-    for j in sql[1]:
-        keys.append(j)
-    for j in range (len(sql[1][keys[0]])):
-        for k in range(len(keys)):
-            strr += keys[k]+" : "+str(sql[1][keys[k]][j])+'\n'
-        strr += '\n'
-    strr += str(len(sql[1][keys[0]]))+' rows fetched\n'
-    restext.insert('end', strr)
+def clicked(event = None):
+    if inputField.get("1.0","end-1c") != '':
+        strr = 'Question : ' + inputField.get("1.0","end-1c") + '\n\n'
+        sql = nlp.englishToSQL(inputField.get("1.0","end-1c"))
+        inputField.delete("1.0","end-1c")
+        sqltext.delete("1.0","end-1c")
+        restext.delete("1.0","end-1c")
+        sqltext.insert('end', sql[0])
+        if len(sql[1]) > 0: 
+            keys = []
+            for j in sql[1]:
+                keys.append(j)
+            for j in range (len(sql[1][keys[0]])):
+                for k in range(len(keys)):
+                    strr += keys[k]+" : "+str(sql[1][keys[k]][j])+'\n'
+                strr += '\n'
+            strr += str(len(sql[1][keys[0]]))+' rows fetched\n'
+        else:
+            strr += 'Error in query'
+        restext.insert('end', strr)
 
 def on_closing():
     nlp.stopnlp()
     print("NLP Closed")
     root.destroy()
 
-nlp.startnlp()
-
-#To remove delay after app opening
-nlp.englishToSQL('movie')
 
 
 root = tkr.Tk()
-root.title('Movie Q&A')
+root.title('MoQAS: Movie Question & Answering System')
 
 
 frame1 = tkr.Frame(root)
 frame1.pack()
+
+label1 = tkr.Label(frame1, text = 'Enter question here....')
+label1.pack(side = 'top')
+
 
 inputField = tkr.Text(frame1, width = 145, height = 1)
 inputField.pack(side = 'left')
@@ -52,6 +56,9 @@ button.pack(side = 'left')
 
 frame2 = tkr.Frame(root)
 frame2.pack()
+
+label2 = tkr.Label(frame2, text = 'SQL Query\t\t\t\t\t\t\t\t\t\t\t\t\tResult')
+label2.pack(side = 'top')
 
 frame3 = tkr.Frame(frame2)
 frame3.pack(side = 'left')
@@ -75,4 +82,12 @@ s2.config(command=sqltext.yview)
 restext.config(yscrollcommand=s2.set)
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
+root.bind('<Return>', clicked)
+
+nlp.startnlp()
+
+#To remove delay after app opening
+nlp.englishToSQL('movie')
+
+
 root.mainloop()

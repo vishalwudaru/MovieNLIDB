@@ -15,7 +15,7 @@ nlp = 1
 
 def startnlp():
     global nlp
-    nlp = StanfordCoreNLP(r'D:\IIIT\stanford-corenlp-full-2018-02-27')
+    nlp = StanfordCoreNLP(r'stanford-corenlp-full-2018-02-27')
 #print(nlp)
 #startnlp()
 #print(nlp)
@@ -118,6 +118,10 @@ def englishToSQL(sentence):
         i += 1
     
     #To find languages
+    for t in tokl:
+        if t in languages:
+            lan.append(t)
+            lann.append(t)
     if len(lan) > 0:
         lan = conj(lan)
     
@@ -205,7 +209,7 @@ def englishToSQL(sentence):
     #==============================================================================
     
     lesslist = ['le', 'below', 'before', 'prior', 'early']
-    greatlist = ['greater', 'above', 'after','follow','later']
+    greatlist = ['greater', 'above', 'after','follow','later', 'more', 'long', 'longer']
     
     #==============================================================================
     #     hrlist = ['hr', 'hour']
@@ -226,7 +230,7 @@ def englishToSQL(sentence):
     
     if(len(lan)>0):
         if mcon == '':
-            mcon = 'where '
+            mcon = 'where ('
         else:
             mcon += 'and ('
         for i in range(len(lan)):
@@ -329,7 +333,7 @@ def englishToSQL(sentence):
                             if tokl[dparse[i+1][2]-1] in pos_tags['CD']:
                                 mstr = mstr + str(w2n.word_to_num(tokl[dparse[i+1][2]-1]))
                                 fl = 1
-            elif (dparse[i][0] == 'advmod' and (dparse[i+2][0] == 'nummod' or dparse[i+3][0] == 'dep') ):
+            elif (dparse[i][0] == 'advmod' and (i+3 < len(dparse) and (dparse[i+2][0] == 'nummod' or dparse[i+3][0] == 'dep')) ):
                 if dparse[i+2][0] == 'nummod':
                     dname = tokl[dparse[i+2][1]-1]
                 else:
@@ -498,7 +502,10 @@ def englishToSQL(sentence):
     conn = sqlite3.connect('Data/MovieDB.db')
     print ("Opened database successfully\n")
     
-    cursor = conn.execute(command)
+    try:
+        cursor = conn.execute(command)
+    except sqlite3.OperationalError:
+        return [command,{}]
     
     rowcount = 0
     result = {}
