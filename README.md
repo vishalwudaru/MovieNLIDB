@@ -1,5 +1,5 @@
 # MovieNLIDB
-
+# MoQAS: Movie Question & Answering System
 ## Problem Statement:
 Ultimate Goal of the project is to build a Chatbot which can detect and also respond to user sarcasm. In the 1st phase of the project, the goal is to build a chatbot which can respond to user queries non-sarcastically. These user queries are restricted under a  closed domain of Movie Database.
 ## Introduction
@@ -184,9 +184,9 @@ Pip install word2number
 Pip install python3-tk
  
 ### Steps
-Setup path of Stanford CoreNLP Folder in Testing.py
+Setup path of Stanford CoreNLP Folder in Main.py
 nlp = StanfordCoreNLP(r'stanford-corenlp-full-2018-02-27') 
-Setup path of Database in Testing.py
+Setup path of Database in Main.py
 conn = sqlite3.connect('Data/MovieDB.db') 
 Run UISample.py
 
