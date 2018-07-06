@@ -1,19 +1,19 @@
 # MovieNLIDB
 
-#Problem Statement
+## Problem Statement:
 Ultimate Goal of the project is to build a Chatbot which can detect and also respond to user sarcasm. In the 1st phase of the project, the goal is to build a chatbot which can respond to user queries non-sarcastically. These user queries are restricted under a  closed domain of Movie Database.
-#Introduction
+## Introduction
 To extract information from a database based system one need to have an expertise in SQL commands. In these conditions a simple conversation system which can convert Natural Language query into a Database query will be a boon to industry. Natural Language Interface to Database systems (NLIDB) helps us to convert Natural Language queries into SQL commands. This project demonstrates a NLIDB system for Movie Database, where an user can ask anything regarding movies in Natural Language and the system will convert it into SQL Query and give results to user.
-#Literature Review
+## Literature Review
 Arjun R. Akula, Rajeev Sangal, Radhika Mamidi (2013) have presented an approach which identifies how the contextual information is utilized in the interactions between the user and the system implemented in the natural Language interface to Database (NLiDB).They have used three models namely (Linear Disjoint Model, Linear Coincident Model and NonLinear Model) for utilizing the contextual information in the interactions.
 
 Saikrishna Srirampur, Ravi Chandibhamar, Ashish Palakurthi, Radhika Mamidi (2014) captures the concepts of the Natural Language query using Concepts Identification technique. They have identified the concepts of their own and making it a Named Entity Recognition(NER) problem and having restricted the domain to the Course management Domain. They have used a machine learning approach and the algorithm used is Conditional Random Field.
 
 Manju Mony ,Jyothi M. Rao ,Manish M. Potey (2014) made a report stating various methodologies and approaches to build NLiDB systems along with their advantages and disadvantages and their application areas.They have also implemented an Natural Language Interface in Airline reservation domain.The report mentions the earlier frameworks such as Pattern matching, Syntax based systems , Semantic based systems and intermediate based representation languages and modern based techniques such as machine learning approaches,Intermediate query generation,Ontology based approaches and other techniques.The paper implements a flight reservation system which uses Intermediate based approach and syntax based approach.Syntax Analysis performs syntactic processing and breaks the input sentence into its constituent parts and identifies the relations between the
 concepts. Intermediate Query approach allows to easily perform the mapping of concepts to an intermediate representation.
-#Methodology
+## Methodology
 This section discusses the methodology used to build this NLIDB System of Movie Database.
-Database Creation
+### Database Creation
 We used a IMDB Dataset found on Github (Link). It consists of 28 attributes out of which we used 12 prime attributes. We divided the dataset among 5 tables Genre, Members, Movie, Movie_Genre and Movie_Members.
 Genre: Universal set of Genres available in our dataset.
 Members: Consists of all the Directors and Main cast of movies.
@@ -24,13 +24,13 @@ fFig 1: ER Diagram
 
 Fig 2: Class Diagram
 
-Integrating NLIDB System 
+### Integrating NLIDB System 
 NLIDB System is responsible for converting user’s NL query into SQL statement. The given NL query is passed into a Tokenizer, then we POS tag the tokenized words and then we parsed it using Stanford Dependency Parser. Dependency parsing helps us in knowing the relation between words. For example, if the user’s query is “What are the top movies rated above 8 which are released before 2015”. In this example, the dependency parser helps us to know that ‘above’ corresponds to rating and ‘before’ corresponds to year. 
 	Based on these Dependencies and POS tags, we generated an SQL query which is used to extract corresponding data from Database.
 
 Fig 3: Data flow Diagram
 
-#Results
+## Results
 We tested the chatbot over wide range of Natural Language queries. The following are the questions which were verified to work correctly using our chatbot. These Questions are categorized further for better readability.
 
 Movies:
@@ -157,30 +157,30 @@ ii.	When did best action movie release
 
 
 
-#Future Work
+## Future Work
 Convert Database result into NL response.
 
-#Related Links
+## Related Links
 Github:
 Sarcastic Chatbot: https://github.com/arunreddy079/sarcastic_chatbot
 NLIDB System:  https://github.com/VishalReddy-Wudaru/MovieNLIDB
 
 Dataset: 
 
-#Manual
-Prerequisites
+## Manual
+### Prerequisites
 Python 3.6
 Java 1.8+
 Stanford CoreNLP 3.9.1 (https://stanfordnlp.github.io/CoreNLP/history.html)
 
-Installation
+### Installation
 pip install stanfordcorenlp
 pip install nltk
 pip install sqlite3
 Pip install word2number
 Pip install python3-tk
  
-Steps
+### Steps
 Setup path of Stanford CoreNLP Folder in Testing.py
 nlp = StanfordCoreNLP(r'stanford-corenlp-full-2018-02-27') 
 Setup path of Database in Testing.py
